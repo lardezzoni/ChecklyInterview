@@ -10,16 +10,15 @@ export default defineConfig({
     muted: false,
     runtimeId: '2022.10', // Specify the runtime version
     frequency: Frequency.EVERY_5M, // Default frequency for checks
-    locations: ['us-east-1', 'eu-west-1'], // Monitoring locations
+    locations: [], // Disable global locations
+    privateLocations: ['laptop-localhost'], // Replace with your private location slug
     tags: ['react', 'nodejs', 'checkly'],
     checkMatch: '**/__checks__/**/*.check.ts', // Pattern to locate check files
     ignoreDirectoriesMatch: [],
     browserChecks: {
       frequency: Frequency.EVERY_10M, // Frequency for browser checks
       testMatch: '**/__checks__/**/*.spec.ts', // Pattern to locate Playwright test files
+      privateLocations: ['laptop-localhost'], // Add private location for browser checks
     },
-  },
-  cli: {
-    runLocation: 'eu-west-1', // Default location for CLI commands
   },
 })
