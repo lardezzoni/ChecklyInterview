@@ -1,0 +1,17 @@
+{
+  "name": "checkly-interview-app",
+  "version": "1.0.0",
+  "scripts": {
+    "install": "npm install --prefix Node && npm install --prefix React/checkly-interview",
+    "build": "npm run build --prefix React/checkly-interview",
+    "start": "node Node/server.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "devDependencies": {
+    "checkly": "^4.15.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
