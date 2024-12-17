@@ -2,8 +2,8 @@ import { defineConfig } from 'checkly'
 import { Frequency } from 'checkly/constructs'
 
 export default defineConfig({
-  projectName: 'ChecklyInterviewApp',
-  logicalId: 'checkly-interview-app-1',
+  projectName: 'ChecklyInterview',
+  logicalId: 'checkly-interview-1',
   repoUrl: 'https://github.com/lardezzoni/ChecklyInterview', // Replace with your repository URL
   checks: {
     activated: true,
