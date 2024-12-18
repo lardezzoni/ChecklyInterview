@@ -1,28 +1,30 @@
 import { ApiCheck } from 'checkly/constructs'
-
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../../../config/config.env') });
+console.log('Config path:', path.resolve(__dirname, '../../../../config/config.env'));
 export const apiCheck = new ApiCheck('api-health-check', {
   name: 'API Health Check',
-  frequency: 5, // Run every 5 minutes
-  locations: ['us-east-1', 'eu-west-1'], // Monitoring locations
-  degradedResponseTime: 2000, // Warn if response time exceeds 2s
-  maxResponseTime: 5000, // Fail if response time exceeds 5s
+  frequency: 5, 
+  locations: ['us-east-1', 'eu-west-1'], 
+  degradedResponseTime: 2000, 
+  maxResponseTime: 5000, 
   request: {
     method: 'GET',
-    url: 'http://localhost:5000/api', // Replace with your API URL
+    url: process.env.URL+'/api', 
     assertions: [
       {
         source: 'STATUS_CODE',
         property: '',
         comparison: 'EQUALS',
-        target: '200', // Status code must be a string
-        regex: 'false', // Not needed for STATUS_CODE
+        target: '200', 
+        regex: 'false', 
       },
       {
         source: 'JSON_BODY',
         property: 'message',
         comparison: 'EQUALS',
-        target: 'Hello from server!',
-        regex: 'false', // Set regex to false for an exact match
+        target: 'Hello from Node.js backend!',
+        regex: 'false', 
     },
 ],
 },

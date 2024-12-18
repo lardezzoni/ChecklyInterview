@@ -1,5 +1,9 @@
 import { defineConfig } from 'checkly'
 import { Frequency } from 'checkly/constructs'
+import * as dotenv from 'dotenv';
+dotenv.config({ path: './.checkly.env' });
+
+// you need to run npx checkly test --env .checkly,env
 
 export default defineConfig({
   projectName: 'ChecklyInterview',
