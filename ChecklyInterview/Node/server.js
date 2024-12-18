@@ -11,7 +11,7 @@ app.get('/api', (req, res) => {
   res.json({ message: 'Hello from Node.js backend!' });
 });
 
-// Fallback route to serve React app
+// Fallback route 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../React/checkly-interview/build', 'index.html'));
 });
