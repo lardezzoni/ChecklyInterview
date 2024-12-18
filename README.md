@@ -1,6 +1,6 @@
 # Checkly API testing
 
-A React.js website with Tailwind CSS and Node.js backend, featuring monitoring and end-to-end testing powered by **Checkly**. Implemented in AWS ElasticBeanStalk.
+A React.js website with Tailwind CSS and Node.js backend, featuring monitoring and end-to-end testing powered by **Checkly**. Implemented in local testing using ngrok.
 
 ---
 
