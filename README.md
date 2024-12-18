@@ -1,6 +1,6 @@
 # Checkly API testing
 
-A React.js website with Tailwind CSS and Node.js backend, featuring monitoring and end-to-end testing powered by **Checkly**. Implemented in AWS ElasticBeanStalk.
+A React.js website with Tailwind CSS and Node.js backend, featuring monitoring and end-to-end testing powered by **Checkly**. Implemented in local testing using ngrok.
 
 ---
 
@@ -55,5 +55,5 @@ This project is a full-stack web application built with:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/lardezzoni/ChecklyInterview.git
+   cd checkly-interview
