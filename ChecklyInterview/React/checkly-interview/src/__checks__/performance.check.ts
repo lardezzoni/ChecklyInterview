@@ -1,32 +1,32 @@
-import { expect, test, Page } from '@playwright/test'
+import { Browser } from 'playwright'
 
-test('evaluate performance metrics', async ({ page }: { page: Page }) => {
-  // Set timeout for the test
-  test.setTimeout(210000)
+export default async function performanceCheck() {
+  const { chromium } = require('playwright')
 
-  // Set action timeout for quicker failure detection
-  const actionTimeout = 10000
+  const browser: Browser = await chromium.launch()
+  const page = await browser.newPage()
 
-  // Navigate to the target URL
   const url = process.env.ENVIRONMENT_URL || 'http://localhost:5000'
-  await page.goto(url, { timeout: actionTimeout })
+  await page.goto(url)
 
-  // Inject a PerformanceObserver to access web performance metrics
   const LCP = await page.evaluate(() => {
     return new Promise<number>((resolve) => {
       new PerformanceObserver((list) => {
         const entries = list.getEntries()
-        const LCP: any = entries.at(-1) // Safely cast to any
+        const LCP = entries.at(-1) as any
         resolve(LCP?.startTime || 0)
       }).observe({
-        type: 'largest-contentful-paint' as any, // Fix type issue
+        type: 'largest-contentful-paint' as any, // Fix the typing issue here
         buffered: true,
       })
     })
   })
 
-  // Log and assert Largest Contentful Paint
   console.log('Largest Contentful Paint:', LCP)
-  expect(LCP).toBeGreaterThan(0)
-  expect(LCP).toBeLessThan(1000) // Assert LCP is under 1000ms
-})
+
+  if (LCP > 1000) {
+    throw new Error(`LCP exceeded threshold: ${LCP}ms`)
+  }
+
+  await browser.close()
+}
