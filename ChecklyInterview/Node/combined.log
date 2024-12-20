@@ -1,0 +1,4 @@
+{"level":"info","message":"2804:14c:132:472a:f4f2:db56:f69c:457c GET / 200 644 - 13.512 ms","timestamp":"2024-12-18 02:51:42.393 PM"}
+{"level":"info","message":"2804:14c:132:472a:f4f2:db56:f69c:457c GET /static/js/main.4615fc48.js 200 227740 - 1.819 ms","timestamp":"2024-12-18 02:51:42.634 PM"}
+{"level":"info","message":"2804:14c:132:472a:f4f2:db56:f69c:457c GET /static/css/main.d4ccf73d.css 200 8277 - 1.452 ms","timestamp":"2024-12-18 02:51:42.642 PM"}
+{"level":"info","message":"2804:14c:132:472a:f4f2:db56:f69c:457c GET /logo192.png 200 5347 - 13.868 ms","timestamp":"2024-12-18 02:51:43.120 PM"}
