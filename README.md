@@ -59,16 +59,16 @@ This project is a full-stack web application built with:
    cd checkly-interview
 
 2. **Install dependencies**:
-   '''bash
+   ```bash
    npm install
 4. **Build the frontend**:
-     '''bash
+   ```bash
    npm run build
 6. **Start the application**:
-     '''bash
+   ```bash
    npm start
 8. **Access the application**:
-     '''bash
+   ```bash
    (http://localhost:5000)
    
 
