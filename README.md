@@ -67,9 +67,10 @@ This project is a full-stack web application built with:
 6. **Start the application**:
    ```bash
    npm start
-8. **Access the application**:
+8. **Access the test**:
    ```bash
-   (http://localhost:5000)
+   npx checkly test --env .checkly.env
+
    
 
    
