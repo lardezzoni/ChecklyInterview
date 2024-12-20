@@ -2,18 +2,21 @@
   "name": "checkly-interview-app",
   "version": "1.0.0",
   "scripts": {
-    "install": "npm install --prefix Node && npm install --prefix React/checkly-interview",
+    "install-node": "npm install --prefix Node --legacy-peer-deps",
+    "install-react": "npm install --prefix React/checkly-interview --legacy-peer-deps",
+    "install": "npm run install-node && npm run install-react",
     "build": "npm run build --prefix React/checkly-interview",
-    "start": "node Node/server.js"
-  },
-  "engines": {
-    "node": "18.x"
+    "start-server": "node Node/server.js",
+    "start-react": "npm start --prefix React/checkly-interview",
+    "start-ngrok": "ngrok http 5000",
+    "start": "npx concurrently \"npm run start-server\" \"npm run start-react\" \"npm run start-ngrok\""
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
     "checkly": "^4.15.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "concurrently": "^8.2.0"
   },
   "dependencies": {
     "dotenv": "^16.4.7"
