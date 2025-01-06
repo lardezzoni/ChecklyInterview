@@ -1,28 +1,31 @@
-import { defineConfig } from 'checkly'
-import { Frequency } from 'checkly/constructs'
+import { defineConfig } from 'checkly';
+import { Frequency } from 'checkly/constructs';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: './.checkly.env' });
 
-// you need to run npx checkly test --env .checkly,env
+// Load environment variables from .checkly.env
+dotenv.config({ path: './.checkly.env' });
 
 export default defineConfig({
   projectName: 'ChecklyInterview',
   logicalId: 'checkly-interview-1',
-  repoUrl: 'https://github.com/lardezzoni/ChecklyInterview', 
+  repoUrl: 'https://github.com/lardezzoni/ChecklyInterview',
   checks: {
     activated: true,
     muted: false,
-    runtimeId: '2022.10', 
+    runtimeId: '2022.10',
     frequency: Frequency.EVERY_5M,
-    locations: [], 
-    privateLocations: ['laptop-localhost'], 
+    locations: ['eu-central-1'], // Specify a valid global location
     tags: ['react', 'nodejs', 'checkly'],
-    checkMatch: '**/__checks__/**/*.check.ts', 
+    checkMatch: '**/__checks__/**/*.check.ts',
     ignoreDirectoriesMatch: [],
     browserChecks: {
-      frequency: Frequency.EVERY_10M, 
-      testMatch: '**/__checks__/**/*.spec.ts', 
-      privateLocations: ['laptop-localhost'], 
+      frequency: Frequency.EVERY_10M,
+      testMatch: '**/__checks__/**/*.spec.ts',
+      // Removed privateLocations
     },
+    // Define environment variables to pass to all checks
+    environmentVariables: [
+      { key: 'URL', value: process.env.URL || 'https://ardezzoni.ngrok.dev' },
+    ],
   },
-})
+});

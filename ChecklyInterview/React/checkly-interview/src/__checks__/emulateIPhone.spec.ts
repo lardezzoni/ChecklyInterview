@@ -20,6 +20,7 @@ test.use({ actionTimeout: 10000 });
 /////////////////////////
 
 test('emulate a mobile device', async ({ browser }) => {
+  const url = process.env.URL || 'https://ardezzoni.ngrok.dev'
   const tempDir = path.join(__dirname, 'temp');
 
 
@@ -30,7 +31,7 @@ test('emulate a mobile device', async ({ browser }) => {
     ...iPhone,
   });
 
-  await page.goto(process.env.URL);
+  await page.goto(url);
 
   // Save the screenshot in the 'temp' directory
   await page.screenshot({ path: path.join(tempDir, 'screenshot.png') });
