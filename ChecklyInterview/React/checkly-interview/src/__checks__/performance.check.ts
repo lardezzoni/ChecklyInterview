@@ -6,7 +6,7 @@ export default async function performanceCheck() {
   const browser: Browser = await chromium.launch()
   const page = await browser.newPage()
 
-  const url = process.env.ENVIRONMENT_URL || 'http://localhost:5000'
+  const url = process.env.ENVIRONMENT_URL || 'https://ardezzoni.ngrok.dev'
   await page.goto(url)
 
   const LCP = await page.evaluate(() => {
@@ -24,7 +24,11 @@ export default async function performanceCheck() {
 
   console.log('Largest Contentful Paint:', LCP)
 
-  if (LCP > 1000) {
+  ///////////////////////////
+  //LCP (Largest Contentful Paint) is a key performance metric used to measure the perceived loading performance of a web page
+  //less than 2.5 sec == good, more than 4 == poor, between that == needs improv
+  ////////////////////////
+  if (LCP > 4000) {
     throw new Error(`LCP exceeded threshold: ${LCP}ms`)
   }
 

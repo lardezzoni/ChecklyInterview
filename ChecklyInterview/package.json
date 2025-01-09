@@ -9,7 +9,8 @@
     "start-server": "node Node/server.js",
     "start-react": "npm start --prefix React/checkly-interview",
     "start-ngrok": "ngrok http 5000",
-    "start": "npx concurrently \"npm run start-server\" \"npm run start-react\" \"npm run start-ngrok\""
+    "start": "npx concurrently \"npm run start-server\" \"npm run start-react\" \"npm run start-ngrok\"",
+    "checkly": "npx checkly test --env .checkly.env"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",

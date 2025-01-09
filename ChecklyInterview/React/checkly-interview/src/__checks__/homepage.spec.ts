@@ -24,10 +24,13 @@ test('Homepage performance check', async ({ page }) => {
 });
 
 
+test('404 page test', async ({ page, context }) => {
 
-test('404 page test', async ({ page }) => {
+
   await page.goto(`${process.env.URL}/non-existent-page`);
 
   const errorMessage = page.locator('h1');
-  await expect(errorMessage).toHaveText('Page not found'); 
+  await expect(errorMessage).toHaveText('Page not found');
+
+
 });

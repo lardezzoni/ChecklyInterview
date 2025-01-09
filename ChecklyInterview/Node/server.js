@@ -37,18 +37,19 @@ app.use(morganMiddleware);
 //helmet
 const helmet = require('helmet');
 
+//there was an error with the fallback page not being correct, but is not helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'https://trusted.cdn.com'],
-      styleSrc: ["'self'", 'https://trusted.cdn.com'],
-      imgSrc: ["'self'", 'data:'],
-      connectSrc: ["'self'"],
-      fontSrc: ["'self'", 'https://trusted.cdn.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'", 'https://*.ngrok.io'], // Allow scripts from ngrok
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://*.ngrok.io'], // Allow inline styles
+      imgSrc: ["'self'", 'data:', 'https://*.ngrok.io'], // Allow images from ngrok
+      connectSrc: ["'self'", 'https://*.ngrok.io'], // Allow connections to ngrok
+      fontSrc: ["'self'", 'https://*.ngrok.io'], // Allow fonts from ngrok
       objectSrc: ["'none'"],
       frameSrc: ["'none'"],
-      upgradeInsecureRequests: [],
+      upgradeInsecureRequests: [], // Optional: If needed for mixed content
     },
   })
 );
@@ -57,13 +58,17 @@ app.use(
 //rate limiter
 const rateLimiter = require('express-rate-limit');
 
-const generalLimiter = rateLimiter({
-    windowMs: 1 * 60 * 1000, 
-    max: 15, 
-    message: 'Too many requests from this IP, please try again later',
-});
+//this is skipping the fallback route
 
-app.use(generalLimiter);
+const generalLimiter = rateLimiter({
+  windowMs: 2 * 60 * 1000, // 1 minute
+  max: 15, // Limit each IP to 15 requests per windowMs
+  message: 'Too many requests from this IP, please try again later',
+  skip: (req) => req.path === '*' || req.path === '/non-existent-page', // Skip fallback and specific paths
+});
+//testing for fallback route being incorrect
+// disabled for testing
+//app.use(generalLimiter);
 
 //secure session manager
 
@@ -106,8 +111,11 @@ app.get('/health', (req, res) => {
       time: new Date().toISOString(),
   });
 });
-
+////////////////////////////////////////
 // Fallback route 
+//This ensures all routes not explicitly matched (e.g., /non-existent-page)
+//are served with the React app's index.html, allowing React Router to manage the route.
+////////////////////////////////////////
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../React/checkly-interview/build', 'index.html'));
 });

@@ -21,12 +21,21 @@ test.use({ actionTimeout: 10000 });
 
 test('emulate a mobile device', async ({ browser }) => {
   const url = process.env.URL || 'https://ardezzoni.ngrok.dev'
-  const tempDir = path.join(__dirname, 'temp');
+  const tempDir = path.join(__dirname, '__checks__', 'temp');
 
+  /////////////////////////
+  // Ensure the temp directory exists
+  /////////////////////////
+  
+  if (!fs.existsSync(tempDir)) {
+    fs.mkdirSync(tempDir, { recursive: true });
+  }
 
   const iPhone = devices['iPhone SE'];
-  
+
+  /////////////////////////
   // Initialize a new page with iPhone settings
+  /////////////////////////
   const page = await browser.newPage({
     ...iPhone,
   });
