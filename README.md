@@ -57,3 +57,20 @@ This project is a full-stack web application built with:
    ```bash
    git clone https://github.com/lardezzoni/ChecklyInterview.git
    cd checkly-interview
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+4. **Build the frontend**:
+   ```bash
+   npm run build
+6. **Start the application**:
+   ```bash
+   npm start
+8. **Access the test**:
+   ```bash
+   npx checkly test --env .checkly.env
+
+   
+
+   

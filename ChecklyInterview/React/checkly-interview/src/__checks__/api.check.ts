@@ -2,6 +2,7 @@ import { ApiCheck } from 'checkly/constructs'
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../../../config/config.env') });
 console.log('Config path:', path.resolve(__dirname, '../../../../config/config.env'));
+
 export const apiCheck = new ApiCheck('api-health-check', {
   name: 'API Health Check',
   frequency: 5, 

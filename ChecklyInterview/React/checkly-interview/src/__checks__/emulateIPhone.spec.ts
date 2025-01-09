@@ -1,34 +1,39 @@
-/**
-  * To learn more about Playwright Test visit:
-  * https://checklyhq.com/docs/browser-checks/playwright-test/
-  * https://playwright.dev/docs/writing-tests
-  */
+const { devices, test } = require('@playwright/test');
+const path = require('path');
+const fs = require('fs');
 
-const { devices, test } = require('@playwright/test')
+/////////////////////////
+// ensure temp exists or create a new dir
+/////////////////////////
 
-// Configure the Playwright Test timeout to 210 seconds,
-// ensuring that longer tests conclude before Checkly's browser check timeout of 240 seconds.
-// The default Playwright Test timeout is set at 30 seconds.
-// For additional information on timeouts, visit: https://checklyhq.com/docs/browser-checks/timeouts/
-test.setTimeout(210000)
 
-// Set the action timeout to 10 seconds to quickly identify failing actions.
-// By default Playwright Test has no timeout for actions (e.g. clicking an element).
-test.use({ actionTimeout: 10000 })
+
+
+
+test.setTimeout(210000);
+
+test.use({ actionTimeout: 10000 });
+
+
+/////////////////////////
+// checkly test taking a screenshot
+/////////////////////////
 
 test('emulate a mobile device', async ({ browser }) => {
-  const iPhone = devices['iPhone SE']
-  // Initialize a new page
-  // with the iPhone user agent, dimensions and pixel density
+  const url = process.env.URL || 'https://ardezzoni.ngrok.dev'
+  const tempDir = path.join(__dirname, 'temp');
+
+
+  const iPhone = devices['iPhone SE'];
+  
+  // Initialize a new page with iPhone settings
   const page = await browser.newPage({
     ...iPhone,
-  })
+  });
 
-  // Change checklyhq.com to your site's URL,
-  // or, even better, define a ENVIRONMENT_URL environment variable
-  // to reuse it across your browser checks
-  await page.goto(process.env.URL)
+  await page.goto(url);
 
-  // Take a screenshot of the current page
-  await page.screenshot({ path: './screenshot.png' })
-})
+  // Save the screenshot in the 'temp' directory
+  await page.screenshot({ path: path.join(tempDir, 'screenshot.png') });
+  console.log(`Screenshot saved to ${path.join(tempDir, 'screenshot.png')}`);
+});

@@ -76,7 +76,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: true, 
-      httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
+      httpOnly: true, 
       sameSite: 'strict', 
     },
   })
