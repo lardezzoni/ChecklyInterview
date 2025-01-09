@@ -58,8 +58,8 @@ app.use(
 const rateLimiter = require('express-rate-limit');
 
 const generalLimiter = rateLimiter({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    max: 15, // Limit each IP to 15 requests per windowMs
+    windowMs: 1 * 60 * 1000, 
+    max: 15, 
     message: 'Too many requests from this IP, please try again later',
 });
 
